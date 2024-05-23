@@ -1,0 +1,28 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+.container {
+    margin-top: 50px;
+}
+.button {
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+.result {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.icons {
+    margin-bottom: 20px;
+}
+.icons i {
+    margin: 0 10px;
+    font-size: 50px;
+    color: orange;
+}
