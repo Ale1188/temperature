@@ -1,33 +1,41 @@
-function convertTemperature(temperature, scale) {
-    let convertedTemp;
-    if (scale === "C") {
-        convertedTemp = (temperature * 9/5) + 32;
-        return `${temperature}°C is ${convertedTemp.toFixed(2)}°F`;
-    } else if (scale === "F") {
-        convertedTemp = (temperature - 32) * 5/9;
-        return `${temperature}°F is ${convertedTemp.toFixed(2)}°C`;
-    } else {
-        return "Invalid scale provided.";
+function convertTemperatureRange(startValue, endValue, scale) {
+    scale = scale.toUpperCase();
+    let result = '';
+    for (let temp = startValue; temp <= endValue; temp++) {
+        if (scale === "C") {
+            let convertedTemp = (temp * 9/5) + 32;
+            result += `${temp}°C is ${convertedTemp.toFixed(2)}°F<br>`;
+        } else if (scale === "F") {
+            let convertedTemp = (temp - 32) * 5/9;
+            result += `${temp}°F is ${convertedTemp.toFixed(2)}°C<br>`;
+        } else {
+            result = "Invalid scale provided.";
+            break;
+        }
     }
+    document.getElementById("result").innerHTML = result;
 }
 
-function promptTemperature() {
-    let temperature = prompt("Enter the temperature:");
-    if (temperature !== null) {
-        temperature = parseFloat(temperature);
-        if (!isNaN(temperature)) {
-            let scale = prompt("Enter the scale (C for Celsius, F for Fahrenheit):");
-            if (scale !== null) {
-                scale = scale.toUpperCase();
-                if (scale === "C" || scale === "F") {
-                    let result = convertTemperature(temperature, scale);
-                    document.getElementById("result").innerText = result;
-                } else {
-                    document.getElementById("result").innerText = "Please enter a valid scale (C or F).";
-                }
-            }
+function promptTemperatureRange() {
+    let startValue = parseFloat(prompt("Enter the starting temperature:"));
+    if (isNaN(startValue)) {
+        alert("Please enter a valid number for the starting temperature.");
+        return;
+    }
+
+    let endValue = parseFloat(prompt("Enter the ending temperature:"));
+    if (isNaN(endValue)) {
+        alert("Please enter a valid number for the ending temperature.");
+        return;
+    }
+
+    let scale = prompt("Enter the scale (C for Celsius, F for Fahrenheit):");
+    if (scale !== null) {
+        scale = scale.toUpperCase();
+        if (scale === "C" || scale === "F") {
+            convertTemperatureRange(startValue, endValue, scale);
         } else {
-            document.getElementById("result").innerText = "Please enter a valid number for temperature.";
+            document.getElementById("result").innerText = "Please enter a valid scale (C or F).";
         }
     }
 }
